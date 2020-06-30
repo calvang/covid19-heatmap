@@ -1,0 +1,41 @@
+* { margin-top: 0;
+    margin-bottom: 0;
+}
+
+.topbar {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: calc(8px + 2vmin);
+  border-radius: 2px;
+  margin:10px;
+  height:auto;
+  width:auto;
+  background-color:#fff;
+  position:fixed!important;
+  z-index:1;
+  overflow:auto
+}
+
+.sidebar {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: calc(5px + 1vmin);
+  border-radius: 2px;
+  height:auto;
+  width:auto;
+  bottom:0;
+  top:0;
+  margin:10px;
+  margin-bottom:10px;
+  background-color:#fff;
+  position:fixed!important;
+  z-index:1;
+  overflow:auto
+}
+
+a {
+  color:white;
+  padding:14px 16px;
+}
+
+a:hover:not(.active) {
+  background-color: #444;
+}
