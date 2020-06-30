@@ -2,6 +2,13 @@
     margin-bottom: 0;
 }
 
+.loading {
+  font-size: calc(16px + 2vmin);
+  height: 400px;
+  line-height: 400px;
+  text-align: center;
+}
+
 .topbar {
   font-family: Impact, Charcoal, sans-serif;
   font-size: calc(8px + 2vmin);

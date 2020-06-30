@@ -7,12 +7,13 @@ export default class FetchMapData extends Component {
     super();
     this.state = {
       heatmapData: [],
-      globalData: {}
+      globalData: {},
+      isLoaded: false
     };
     this.apiUrl = 'https://api.covid19api.com/summary';
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { apiUrl } = this;
     var caseData = [];
     var global = {};
@@ -24,12 +25,17 @@ export default class FetchMapData extends Component {
     .then((data) => {
       var summaryData = data.Countries;
       global = data.Global
+      // console.log("Summary:");
       // console.log(summaryData);
+      // console.log("Country List");
+      // console.log(countryList);
       var i = [];
       var j = [];
-      for (i in countryList) {
-        for (j in summaryData) {
+      for (i of countryList) {
+        //console.log(i);
+        for (j of summaryData) {
           if (i.ISO2 === j.CountryCode) {
+            //console.log(i.ISO2);
             caseData.push({
               Lat: i.Lat,
               Lon: i.Lon,
@@ -45,16 +51,24 @@ export default class FetchMapData extends Component {
           }
         }
       }
+      console.log("Case Data");
+      console.log(caseData);
     })
     .then((data) => {
       this.setState({
         heatmapData: caseData,
-        globalData: global
+        globalData: global,
       })
-      // console.log("HEATMAP DATA!");
-      // console.log(this.state.heatmapData);
-      // console.log("GLOBAL DATA!");
-      // console.log(this.state.globalData);
+      console.log("HEATMAP DATA!");
+      console.log(this.state.heatmapData);
+      console.log("GLOBAL DATA!");
+      console.log(this.state.globalData);
+      console.log(this.state.isLoaded);
+    })
+    .then((data) => {
+      this.setState({
+        isLoaded: true
+      });
     })
     .catch((error) => console.log(error));
 
@@ -95,14 +109,35 @@ export default class FetchMapData extends Component {
     // })
     // .catch((error) => console.log(error));
   }
-       
-  renderMap(map, maps) {
-    console.log("Map Rendered")
-  }
 
   render() {
+    // var heatmapPositions = [];
+    // var i = {};
+    // for (i in this.state.heatmapData) {
+    //   heatmapPositions.push({
+    //     lat: i.Lat,
+    //     lng: i.Lon
+    //   });
+    // }
+    // console.log(heatmapPositions);
+    // var heatmap = {
+    //   positions: heatmapPositions,
+    //   options: {
+    //     radius: 20,
+    //     opacity: 1
+    //   }
+    // };
+    console.log("Before transmit:")
+    console.log(this.state.heatmapData);
     return (
-      <MapContainer />
+      <div>
+        { this.state.isLoaded &&
+        <MapContainer 
+          heatmapData={this.state.heatmapData}
+          isLoaded={this.state.isLoaded}
+        />
+        }
+      </div>
     );
   }
 }
