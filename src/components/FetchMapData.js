@@ -25,17 +25,11 @@ export default class FetchMapData extends Component {
     .then((data) => {
       var summaryData = data.Countries;
       global = data.Global
-      // console.log("Summary:");
-      // console.log(summaryData);
-      // console.log("Country List");
-      // console.log(countryList);
       var i = [];
       var j = [];
       for (i of countryList) {
-        //console.log(i);
         for (j of summaryData) {
           if (i.ISO2 === j.CountryCode) {
-            //console.log(i.ISO2);
             caseData.push({
               Lat: i.Lat,
               Lon: i.Lon,
@@ -51,19 +45,12 @@ export default class FetchMapData extends Component {
           }
         }
       }
-      console.log("Case Data");
-      console.log(caseData);
     })
     .then((data) => {
       this.setState({
         heatmapData: caseData,
         globalData: global,
       })
-      console.log("HEATMAP DATA!");
-      console.log(this.state.heatmapData);
-      console.log("GLOBAL DATA!");
-      console.log(this.state.globalData);
-      console.log(this.state.isLoaded);
     })
     .then((data) => {
       this.setState({
@@ -71,64 +58,9 @@ export default class FetchMapData extends Component {
       });
     })
     .catch((error) => console.log(error));
-
-    // const { apiUrl } = this;
-    // // Get all the countries/provinces
-    // fetch(apiUrl + 'countries', { credentials: 'same-origin'})
-    // .then((response) => {
-    //   if (!response.ok) throw Error (response.statusText);
-    //   return response.json();
-    // })
-    // .then((data) => {
-    //   this.setState({
-    //     locations: data
-    //   })
-    //   console.log(this.state.locations);
-    // })
-    // .then(async data => {
-    //   const { locations, heatmapData, currentDate, twoDaysAgo } = this.state;
-    //   await Promise.all(locations.map((dict) => {
-    //     let country = dict.Country;
-    //     let url = apiUrl + "country/" + country + "?" + "from=" + twoDaysAgo + "&to=" + currentDate;
-    //     console.log(url);
-    //     return fetch(url, { credentials: 'same-origin' })
-    //       .then((response) => {
-    //         if (!response.ok) throw Error (response.statusText);
-    //         return response.json();
-    //       })
-    //       .then((data) => {
-    //         console.log(data);
-    //         this.setState({
-    //           heatmapData: heatmapData.append(data[data.length - 1])
-    //         })
-    //       })
-    //   }));
-    // })
-    // .then(() => {
-    //   console.log(this.state.heatmapData);
-    // })
-    // .catch((error) => console.log(error));
   }
 
   render() {
-    // var heatmapPositions = [];
-    // var i = {};
-    // for (i in this.state.heatmapData) {
-    //   heatmapPositions.push({
-    //     lat: i.Lat,
-    //     lng: i.Lon
-    //   });
-    // }
-    // console.log(heatmapPositions);
-    // var heatmap = {
-    //   positions: heatmapPositions,
-    //   options: {
-    //     radius: 20,
-    //     opacity: 1
-    //   }
-    // };
-    console.log("Before transmit:")
-    console.log(this.state.heatmapData);
     return (
       <div>
         { this.state.isLoaded &&

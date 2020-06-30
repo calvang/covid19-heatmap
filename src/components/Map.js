@@ -24,59 +24,6 @@ export default class MapContainer extends Component {
 
 
   componentWillMount() {
-    // var heatmapPositions = [];
-    // var willWait = new Promise(
-    //   function (resolve, reject) {
-    //     if (true) {
-    //       resolve();
-    //     } else {
-    //       reject(new Error('Heatmap not loaded'));
-    //     }
-    //   }
-    // );
-    // var waitForData = () => {
-    //   willWait
-    //   .then((fulfilled) => {
-    //     var i = {};
-    //     for (i in this.props.heatmapData) {
-    //       if (i.Lat !== undefined) {
-    //         heatmapPositions.push({
-    //           lat: i.Lat,
-    //           lng: i.Lon
-    //         });
-    //       }
-    //     }
-    //     var heatmap = {
-    //       positions: heatmapPositions,
-    //       options: {
-    //         radius: 20,
-    //         opacity: 1
-    //       }
-    //     };
-    //     this.setState({
-    //       heatmapData: heatmap
-    //     });
-    //     console.log("FINAL CHECK!");
-    //     console.log(this.state.heatmapData);
-    //   })
-    //   .catch((error) => {console.log(error.message)})
-    // }
-    // var i = {};
-    // for (i in this.props.heatmapData) {
-    //   if (i.Lat !== undefined) {
-    //     heatmapPositions.push({
-    //       lat: i.Lat,
-    //       lng: i.Lon
-    //     });
-    //   }
-    // }
-    // var heatmap = {
-    //   positions: heatmapPositions,
-    //   options: {
-    //     radius: 20,
-    //     opacity: 1
-    //   }
-    // };
     var heatmapPositions = [];
     var i = {};
     console.log("Initial transmission");
@@ -85,7 +32,8 @@ export default class MapContainer extends Component {
       
         heatmapPositions.push({
           lat: i.Lat,
-          lng: i.Lon
+          lng: i.Lon,
+          weight: i.TotalConfirmed
         });
       
     }
@@ -93,8 +41,24 @@ export default class MapContainer extends Component {
     var heatmap = {
       positions: heatmapPositions,
       options: {
-        radius: 20,
-        opacity: 1
+        // gradient: [
+        //   'rgba(0, 255, 255, 0)',
+        //   'rgba(0, 255, 255, 1)',
+        //   'rgba(0, 191, 255, 1)',
+        //   'rgba(0, 127, 255, 1)',
+        //   'rgba(0, 63, 255, 1)',
+        //   'rgba(0, 0, 255, 1)',
+        //   'rgba(0, 0, 223, 1)',
+        //   'rgba(0, 0, 191, 1)',
+        //   'rgba(0, 0, 159, 1)',
+        //   'rgba(0, 0, 127, 1)',
+        //   'rgba(63, 0, 91, 1)',
+        //   'rgba(127, 0, 63, 1)',
+        //   'rgba(191, 0, 31, 1)',
+        //   'rgba(255, 0, 0, 1)'
+        // ],
+        radius: 100,
+        opacity: 0.7
       }
     };
     this.setState({
@@ -109,20 +73,6 @@ export default class MapContainer extends Component {
   }
 
   render() {
-  //   var heatmapData = {
-  //     positions: [
-  //       {lat: 55.5, lng: 34.56},
-  //       {lat: 55.5, lng: 34.56},
-  //       {lat: 55.5, lng: 34.56},
-  //       {lat: 55.5, lng: 34.56},
-  //       {lat: 55.5, lng: 34.56},
-  //       {lat: 34.7, lng: 28.4}
-  //     ],
-  //     options: {
-  //       radius: 20,
-  //       opacity: 1
-  //     }
-  //   }
     console.log("Rendering map...");
     const { zoom, center, options, heatmapData } = this.state;
     return (
