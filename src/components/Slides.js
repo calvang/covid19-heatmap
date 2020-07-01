@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import { grey, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
+import heatmap from '../images/heatmap.png';
 
 export default class Slides extends Component{
-  constructor(props) {
-    super(props);
-    this.setState({
-      open: true
-    })
-  }
 
-  // shouldComponentUpdate(nextProps) {
-  //   return this.state.name !== nextProps.name;
-  // }
 
   render() {
     return (
@@ -37,7 +29,7 @@ export default class Slides extends Component{
         />
         <Slide
           media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" alt="img3"/>
+            <img src={heatmap} alt="img3"/>
           }
           mediaBackgroundStyle={{ backgroundColor: grey[200] }}
           style={{ backgroundColor: green[900] }}
@@ -46,11 +38,12 @@ export default class Slides extends Component{
         />
         <Slide
           media={
-            <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" alt="img2"/>
+            <div><i className="fa fa-map-o w3-xxxlarge"></i>
+            <p>Place heatmap here</p></div>
           }
           mediaBackgroundStyle={{ backgroundColor: grey[200] }}
           style={{ backgroundColor: grey[800] }}
-          title="Get Access to Resource"
+          title="Get Access to Resources"
           subtitle="Get quick access to local Covid-19 resources in your area."
         />
       </AutoRotatingCarousel>

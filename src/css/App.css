@@ -12,7 +12,7 @@
 .topbar {
   font-family: Impact, Charcoal, sans-serif;
   font-size: calc(8px + 2vmin);
-  border-radius: 2px;
+  border-radius: 5px;
   margin:10px;
   height:auto;
   width:auto;
@@ -25,8 +25,8 @@
 .sidebar {
   font-family: Impact, Charcoal, sans-serif;
   font-size: calc(5px + 1vmin);
-  border-radius: 2px;
-  height:auto;
+  border-radius: 5px;
+  height:auto];
   width:auto;
   /*bottom:0;*/
   top:0;
@@ -34,8 +34,46 @@
   /*margin-bottom:10px;*/
   background-color:#fff;
   position:fixed!important;
+  z-index:2;
+  overflow:auto
+}
+
+.panel {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: calc(5px + 1vmin);
+  border-radius: 5px;
+  height:auto;
+  width:auto;
+  /* padding:20px; */
+  padding-left:100px;
+  padding-right:20px;
+  padding-bottom:auto;
+  /* bottom:0; */
+  top:0;
+  margin:10px;
+  /*margin-bottom:10px;*/
+  background-color:#DCDCDC;
+  position:fixed!important;
   z-index:1;
   overflow:auto
+}
+
+.panel-title {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: calc(2px + 2vmin);
+  text-align:center;
+}
+
+.panel-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-right {
+  display: flex;
+  align-items: right;
+  justify-content: right;
 }
 
 a {
