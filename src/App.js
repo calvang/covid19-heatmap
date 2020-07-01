@@ -1,21 +1,14 @@
-import React, { useState } from 'react';
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import React from 'react';
 import Map from './components/FetchMapData';
-import { Slides } from './components/Slides';
-import Menu from './Menu';
+import Menu from './components/Menu';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import './css/App.css';
 
 function App() {
-  const [handleOpen, setHandleOpen] = useState({ open: true });
   const matches = useMediaQuery("(max-width:600px)");
   return (
     <>
-      <Menu />
-      <Slides
-        isMobile={matches}
-        handleOpen={handleOpen}
-        setHandleOpen={setHandleOpen}
-      />
+      <Menu isMobile={matches}/>
       <Map />
     </>
   );

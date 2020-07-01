@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MapContainer from './Map';
-import countryList from '../countryDataFull.json';
+import countryList from '../dataset/fullDataSet.json';
 
 export default class FetchMapData extends Component {
   constructor() {
@@ -30,15 +30,31 @@ export default class FetchMapData extends Component {
       for (i of countryList) {
         for (j of summaryData) {
           if (i.ISO2 === j.CountryCode) {
+            var confirmedPerCapita = Math.round(1000000 * Number(j.TotalConfirmed)/Number(i.Population));
+            var deathsPerCapita = Math.round(1000000 * Number(j.TotalDeaths)/Number(i.Population));
+            var confirmedDeathRate = 100 * Number(j.TotalDeaths)/Number(j.TotalConfirmed);
+            var percentRecovered = 100 * Number(j.TotalRecovered)/Number(j.TotalDeaths);
+            if (confirmedDeathRate === Infinity) {
+              confirmedDeathRate = 0;
+            }
+            if (percentRecovered === Infinity) {
+              percentRecovered = 'unknown';
+            }
             caseData.push({
+              Country: i.Country,
+              Population: i.Population,
               Lat: i.Lat,
               Lon: i.Lon,
               NewConfirmed: j.NewConfirmed,
               TotalConfirmed: j.TotalConfirmed,
+              ConfirmedPerCapita: confirmedPerCapita,
               NewDeaths: j.NewConfirmed,
               TotalDeaths: j.TotalDeaths,
+              DeathsPerCapita: deathsPerCapita,
+              ConfirmedDeathRate: confirmedDeathRate,
               NewRecovered: j.NewRecovered,
               TotalRecovered: j.TotalRecovered,
+              PercentRecovered: percentRecovered,
               Date: j.Date
             });
             break;
@@ -51,6 +67,7 @@ export default class FetchMapData extends Component {
         heatmapData: caseData,
         globalData: global,
       })
+      //console.log(this.state.heatmapData);
     })
     .then((data) => {
       this.setState({

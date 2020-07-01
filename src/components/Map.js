@@ -22,12 +22,11 @@ export default class MapContainer extends Component {
     }
   }
 
-
   componentWillMount() {
     var heatmapPositions = [];
     var i = {};
-    console.log("Initial transmission");
-    console.log(this.props.heatmapData);
+    //console.log("Initial transmission");
+    //console.log(this.props.heatmapData);
     for (i of this.props.heatmapData) {
       
         heatmapPositions.push({
@@ -37,7 +36,7 @@ export default class MapContainer extends Component {
         });
       
     }
-    console.log(heatmapPositions);
+    //console.log(heatmapPositions);
     var heatmap = {
       positions: heatmapPositions,
       options: {
@@ -64,8 +63,8 @@ export default class MapContainer extends Component {
     this.setState({
       heatmapData: heatmap
     });
-    console.log("FINAL CHECK!");
-    console.log(this.state.heatmapData);
+    //console.log("FINAL CHECK!");
+    //console.log(this.state.heatmapData);
   }
 
   renderMap(map, maps) {
