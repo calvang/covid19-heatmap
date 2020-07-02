@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import MapContainer from './Map';
 import countryList from '../dataset/fullDataSet.json';
+import countyData from '../dataset/fullCountyData.json';
 
 export default class FetchMapData extends Component {
   constructor() {
     super();
     this.state = {
+      countyData: [],
       heatmapData: [],
       globalData: {},
       isLoaded: false
@@ -29,7 +31,7 @@ export default class FetchMapData extends Component {
       var j = [];
       for (i of countryList) {
         for (j of summaryData) {
-          if (i.ISO2 === j.CountryCode) {
+          if (i.ISO2 === j.CountryCode && i.ISO2 !== 'US') {
             var confirmedPerCapita = Math.round(1000000 * Number(j.TotalConfirmed)/Number(i.Population));
             var deathsPerCapita = Math.round(1000000 * Number(j.TotalDeaths)/Number(i.Population));
             var confirmedDeathRate = 100 * Number(j.TotalDeaths)/Number(j.TotalConfirmed);
@@ -64,6 +66,7 @@ export default class FetchMapData extends Component {
     })
     .then((data) => {
       this.setState({
+        countyData: countyData,
         heatmapData: caseData,
         globalData: global,
       })

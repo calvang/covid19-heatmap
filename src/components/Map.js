@@ -28,13 +28,11 @@ export default class MapContainer extends Component {
     //console.log("Initial transmission");
     //console.log(this.props.heatmapData);
     for (i of this.props.heatmapData) {
-      
         heatmapPositions.push({
           lat: i.Lat,
           lng: i.Lon,
           weight: i.TotalConfirmed
         });
-      
     }
     //console.log(heatmapPositions);
     var heatmap = {
