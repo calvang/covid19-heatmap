@@ -7,6 +7,8 @@ export default class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      globalData: {},
+      countyData: [],
       heatmapData: {},
       center: {
         lat: 40,
@@ -59,7 +61,9 @@ export default class MapContainer extends Component {
       }
     };
     this.setState({
-      heatmapData: heatmap
+      heatmapData: heatmap,
+      countyData: this.props.countyData,
+      globalData: this.props.globalData
     });
     //console.log("FINAL CHECK!");
     //console.log(this.state.heatmapData);

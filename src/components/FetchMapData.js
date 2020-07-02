@@ -86,6 +86,8 @@ export default class FetchMapData extends Component {
         { this.state.isLoaded &&
         <MapContainer 
           heatmapData={this.state.heatmapData}
+          globalData={this.state.globalData}
+          countyData={this.state.countyData}
           isLoaded={this.state.isLoaded}
         />
         }
