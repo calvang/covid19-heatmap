@@ -31,7 +31,7 @@ export default class FetchMapData extends Component {
       var j = [];
       for (i of countryList) {
         for (j of summaryData) {
-          if (i.ISO2 === j.CountryCode && i.ISO2 !== 'US') {
+          if (i.ISO2 === j.CountryCode && i.ISO2 !== 'US' && i.ISO2 !== 'BR') {
             var confirmedPerCapita = Math.round(1000000 * Number(j.TotalConfirmed)/Number(i.Population));
             var deathsPerCapita = Math.round(1000000 * Number(j.TotalDeaths)/Number(i.Population));
             var confirmedDeathRate = 100 * Number(j.TotalDeaths)/Number(j.TotalConfirmed);
