@@ -7,5 +7,6 @@ curl https://usafactsstatic.blob.core.windows.net/public/data/covid-19/covid_con
 
 echo "Processing data..."
 python3 processCounties.py
+python3 processCountiesShort.py
 
 echo "Done."
