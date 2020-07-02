@@ -1,46 +1,36 @@
-import csv
-import json
+import csv, json
 
-# merge census data from worldbank.org with json data
-# 1. get population data and ISO3 identified from countryPopulations.csv
-# 2. get ISO3 and ISO2 from countryInfo.json
-# 3. get current full data
-# 4. output full data with appended ISO3 and population elements
+abridged_data = []
 
-populationList = []
+with open('counties.json','r') as file1:
+    data = file1.read()
+    county_data = json.loads(data)
 
-# data to map ISO3 to ISO2
-with open('countryInfo.json', 'r') as myfile1:
-    data1=myfile1.read()
-    countryInfo = json.loads(data1)
+with open('currentCountyCases.csv') as file2:
+    reader = csv.reader(file2, delimiter=',')
+    
+    line = 0
+    for row in reader:
+        if line > 0:
+            print(row[0])
+            first = row[0]
+            last = row[len(row)-1]
+            county_dict = {
+                'FIPS': first,
+                'LatestCases': last
+            }
+            if not int(first) == 0: 
+                abridged_data.append(county_dict)
+            # print(county_dict['FIPS'])
+        line += 1
 
-fullData = []
+for county in abridged_data:
+    for i in county_data:
+        if int(county['FIPS']) == int(i['FIPS']):
+            county['Lat'] = i['Latitude']
+            county['Lon'] = i['Longitude']
+            county['Population'] = i['Population']
+            county['State'] = i['State']
 
-# current full dataset
-with open('countryDataFull.json', 'r') as myfile2:
-    data2=myfile2.read()
-    fullData = json.loads(data2)
-
-# store ISO2 values in populationList
-for i in populationList:
-    for j in countryInfo:
-        if i['ISO3'] == j['iso3']:
-            i['ISO2'] = j['iso2']
-            # Get emojis too!
-            i['Emoji'] = j['emoji']
-            print("New ISO2: " + i['ISO2'])
-            break
-print("Initial: " + fullData[0]['ISO2'])
-# store ISO3 and population in full data
-for i in fullData:
-    for j in populationList:
-        if 'ISO2' in j and 'ISO2' in i and i['ISO2'] == j['ISO2']:
-            i['ISO3'] = j['ISO3']
-            i['Emoji'] = j['Emoji']
-            i['Population'] = j['Population']
-            print("New Pop: " + i['Population'])
-            break
-
-with open('fullDataSet.json', 'w') as outfile:
-    outfile.write(json.dumps(fullData, ensure_ascii=False))
-
+with open('fullCountyData.json', 'w') as outfile:
+    outfile.write(json.dumps(abridged_data, indent=4, sort_keys=True))
