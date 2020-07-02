@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Slides from './Slides';
 import Options from '../views/Options';
-import Stats from '../views/Stats';
+import Global from '../views/GlobalStats';
+import USA from '../views/USAStats';
 import Contact from '../views/Contact';
 import '../css/App.css';
 
 const Panels = {
   0: null,
   1: <Options />,
-  2: <Stats />,
-  3: <Contact />
+  2: <Global />,
+  3: <USA />,
+  4: <Contact />
 }
 
 export default class Menu extends Component {
@@ -17,11 +19,13 @@ export default class Menu extends Component {
     super(props);
     this.state = {
       isCarouselOpen: true,
+      isDropOpen: false,
       isMenuOpen: false,
-      panels: [0,1,2,3],
+      panels: [0,1,2,3,4],
       currentPanel: 0
     }
     this.hideCarousel = this.hideCarousel.bind(this);
+    this.openPanel = this.openPanel.bind(this);
   }
 
   toggleMenu = () => {
@@ -38,6 +42,16 @@ export default class Menu extends Component {
     this.setState({ isCarouselOpen: false });
   }
 
+  toggleDrop() {
+    const { isDropOpen, currentPanel } = this.state;
+    if (isDropOpen) {
+      this.setState({ isDropOpen: false });
+    } else {
+      this.setState({ isDropOpen: true });
+    }
+    this.openPanel(currentPanel);
+  }
+
   openPanel(panelNum) {
     const { currentPanel } = this.state;
     panelNum === currentPanel ? this.setState({ currentPanel: 0 })
@@ -47,7 +61,7 @@ export default class Menu extends Component {
   }
 
   render() {
-    const { isMenuOpen } = this.state;
+    const { isMenuOpen, isDropOpen } = this.state;
     //const [handleOpen, setHandleOpen] = useState({ open: true });
     //const matches = useMediaQuery("(max-width:600px)");
     return (
@@ -60,6 +74,7 @@ export default class Menu extends Component {
         { isMenuOpen ?
           <div className="sidebar w3-white">
             <nav className="sidebar w3-white w3-animate-top" styles="z-index:3;width:100px;" id="mySidebar">
+              <br></br>
               <div className="w3-bar-block w3-center">
                 <button className="w3-bar-item w3-button w3-padding" 
                   onClick={this.toggleMenu}>
@@ -72,10 +87,24 @@ export default class Menu extends Component {
                   <p>Options</p>
                 </button>
                 <button className="w3-bar-item w3-button w3-padding"
-                  onClick={() => this.openPanel(2)}>
+                  onClick={() => this.toggleDrop()}>
                   <i className="fa fa-database fa-fw w3-xlarge"></i>
                   <p>Stats</p>
                 </button>
+                { isDropOpen ? 
+                  <div className="drop w3-light-gray">
+                    <button className="w3-bar-item w3-button w3-padding"
+                      onClick={() => this.openPanel(2)}>
+                      <i className="fa fa-globe fa-fw w3-xlarge"></i>
+                      <p>Global</p>
+                    </button>
+                    <button className="w3-bar-item w3-button w3-padding"
+                      onClick={() => this.openPanel(3)}>
+                      <i className="fa fa-map-marker fa-fw w3-xlarge"></i>
+                      <p>U.S.</p>
+                    </button>
+                  </div>
+                : null }
                 <button className="w3-bar-item w3-button w3-padding"
                   onClick={this.showCarousel}>
                   <i className="fa fa-info-circle fa-fw w3-xlarge"></i>

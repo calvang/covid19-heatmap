@@ -5,7 +5,6 @@ import heatmap from '../images/heatmap.png';
 
 export default class Slides extends Component{
 
-
   render() {
     return (
       <AutoRotatingCarousel

@@ -26,9 +26,9 @@
   font-family: Impact, Charcoal, sans-serif;
   font-size: calc(5px + 1vmin);
   border-radius: 5px;
-  height:auto];
+  height:auto;
   width:auto;
-  /*bottom:0;*/
+  bottom:0;
   top:0;
   margin:10px;
   /*margin-bottom:10px;*/
@@ -36,6 +36,16 @@
   position:fixed!important;
   z-index:2;
   overflow:auto
+}
+
+.drop {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: calc(5px + 1vmin);
+  border-radius: 5px;
+  height:auto;
+  width:inherit;
+  background-color:#DCDCDC;
+  z-index:2;
 }
 
 .panel {
@@ -48,7 +58,7 @@
   padding-left:100px;
   padding-right:20px;
   padding-bottom:auto;
-  /* bottom:0; */
+  bottom:0;
   top:0;
   margin:10px;
   /*margin-bottom:10px;*/
