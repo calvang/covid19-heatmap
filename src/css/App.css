@@ -22,6 +22,22 @@
   overflow:auto
 }
 
+.bottombar {
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: calc(4px + 2vmin);
+  border-radius: 5px;
+  margin:24px;
+  height:auto;
+  width:auto;
+  bottom:0;
+  right:40px;
+  text-align:left;
+  background-color:#fff;
+  position:fixed!important;
+  z-index:1;
+  overflow:auto
+}
+
 .sidebar {
   font-family: Impact, Charcoal, sans-serif;
   font-size: calc(5px + 1vmin);
@@ -55,11 +71,12 @@
   height:auto;
   width:auto;
   /* padding:20px; */
-  padding-left:100px;
+  padding-left:20px;
   padding-right:20px;
   padding-bottom:auto;
   bottom:0;
   top:0;
+  left:100px;
   margin:10px;
   /*margin-bottom:10px;*/
   background-color:#DCDCDC;

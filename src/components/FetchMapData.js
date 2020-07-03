@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MapContainer from './Map';
+import Menu from './Menu';
 import countryList from '../dataset/fullDataSet.json';
 import countyData from '../dataset/fullCountyData.json';
 
@@ -19,6 +20,7 @@ export default class FetchMapData extends Component {
     const { apiUrl } = this;
     var caseData = [];
     var global = {};
+    // fetch live global updates
     fetch(apiUrl, { credentials: 'same-origin'})
     .then((response) => {
       if (!response.ok) throw Error (response.statusText);
@@ -83,10 +85,12 @@ export default class FetchMapData extends Component {
   render() {
     return (
       <div>
+        <Menu 
+          isMobile={this.props.isMobile}
+          globalData={this.state.globalData}/>
         { this.state.isLoaded &&
         <MapContainer 
           heatmapData={this.state.heatmapData}
-          globalData={this.state.globalData}
           isLoaded={this.state.isLoaded}
         />
         }

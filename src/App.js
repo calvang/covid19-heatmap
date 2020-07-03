@@ -8,8 +8,7 @@ function App() {
   const matches = useMediaQuery("(max-width:600px)");
   return (
     <>
-      <Menu isMobile={matches}/>
-      <Map />
+      <Map isMobile={matches} />
     </>
   );
 }

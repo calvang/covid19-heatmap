@@ -62,8 +62,8 @@ export default class Menu extends Component {
 
   render() {
     const { isMenuOpen, isDropOpen } = this.state;
-    //const [handleOpen, setHandleOpen] = useState({ open: true });
-    //const matches = useMediaQuery("(max-width:600px)");
+    const { globalData } = this.props;
+    //console.log(this.props.globalData)
     return (
       <div className="w3-gray">
         <Slides
@@ -124,11 +124,21 @@ export default class Menu extends Component {
             <div className="w3-bar-block w3-center">
               <button className="w3-bar-item w3-button w3-padding" 
                 onClick={this.toggleMenu}>
-                <i className="fa fa-bars fa-fw w3-xlarge"></i> Covid-19 Projection Map
+                <i className="fa fa-bars fa-fw w3-xlarge"></i> Covid-19 Projection Heatmap
               </button> 
             </div>
           </nav>
           }
+          <nav className="bottombar w3-white" styles="z-index:3;width:100px;" id="mySidebar">
+            <div className="w3-bar-block w3-center">
+              <button className="w3-bar-item w3-button w3-padding" 
+                onClick={this.toggleMenu}>
+                <p>
+                Total Cases: {globalData.NewConfirmed}   Total Recovered: {globalData.TotalRecovered}
+                </p>
+              </button> 
+            </div>
+          </nav>
       </div>
     );
   }
