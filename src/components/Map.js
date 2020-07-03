@@ -9,6 +9,13 @@ export default class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      defaultGradient: false,
+      datasets: {
+        'All': true,
+        'US': false,
+        'Brazil': false,
+        'Countries': false
+      },
       globalData: {},
       countyData: [],
       heatmapData: {},
@@ -31,76 +38,89 @@ export default class MapContainer extends Component {
   }
 
   componentWillMount() {
-    this.mapDetailed()
+    this.addHeatmap()
   }
 
-  mapCountries(){
+  // mapCountries(){
+  //   var heatmapPositions = [];
+  //   var i = {};
+  //   for (i of this.props.heatmapData) {
+  //     heatmapPositions.push({
+  //       lat: i.Lat,
+  //       lng: i.Lon,
+  //       weight: i.TotalConfirmed
+  //     });
+  //   }
+  //   var heatmap = {
+  //     positions: heatmapPositions,
+  //     options: {
+  //       radius: 20,
+  //       opacity: 0.7
+  //     }
+  //   };
+  //   //console.log(heatmap);
+  //   this.setState({
+  //     heatmapData: heatmap,
+  //   });
+  // }
+
+  addHeatmap() {
+    const { defaultGradient, datasets } = this.state;
     var heatmapPositions = [];
     var i = {};
-    for (i of this.props.heatmapData) {
-      heatmapPositions.push({
-        lat: i.Lat,
-        lng: i.Lon,
-        weight: i.TotalConfirmed
-      });
-    }
-    var heatmap = {
-      positions: heatmapPositions,
-      options: {
-        radius: 20,
-        opacity: 0.7
+    console.log(datasets)
+    if (datasets['Countries'] || datasets['All']) {
+      for (i of this.props.heatmapData) {
+        if (datasets['Countries'] || 
+          (i.ISO2 !== 'US' && i.ISO2 !== 'BR')) {
+          heatmapPositions.push({
+            lat: i.Lat,
+            lng: i.Lon,
+            weight: i.TotalConfirmed
+          });
+        }
       }
-    };
-    console.log(heatmap);
-    this.setState({
-      heatmapData: heatmap,
-    });
-  }
-
-  mapDetailed() {
-    var heatmapPositions = [];
-    var i = {};
-    for (i of this.props.heatmapData) {
-      heatmapPositions.push({
-        lat: i.Lat,
-        lng: i.Lon,
-        weight: i.TotalConfirmed
-      });
     }
-    for (i of countyData) {
-      heatmapPositions.push({
-        lat: i.lat,
-        lng: i.lon,
-        weight: i.weight
-      });
+    if (datasets['US'] || datasets['All']) {
+      for (i of countyData) {
+        heatmapPositions.push({
+          lat: i.lat,
+          lng: i.lon,
+          weight: i.weight
+        });
+      }
     }
+    if (datasets['Brazil'] || datasets['All']) {
     for (i of brazilData) {
-      heatmapPositions.push({
-        lat: i.lat,
-        lng: i.lon,
-        weight: i.weight
-      });
+        heatmapPositions.push({
+          lat: i.lat,
+          lng: i.lon,
+          weight: i.weight
+        });
+      }
     }
-    console.log(heatmapPositions);
+    //console.log(heatmapPositions);
     var heatmap = {
       positions: heatmapPositions,
       options: {
-        gradient: [
-          'rgba(0, 255, 255, 0)',
-          'rgba(0, 255, 255, 1)',
-          'rgba(0, 191, 255, 1)',
-          'rgba(0, 127, 255, 1)',
-          'rgba(0, 63, 255, 1)',
-          'rgba(0, 0, 255, 1)',
-          'rgba(0, 0, 223, 1)',
-          'rgba(0, 0, 191, 1)',
-          'rgba(0, 0, 159, 1)',
-          'rgba(0, 0, 127, 1)',
-          'rgba(63, 0, 91, 1)',
-          'rgba(127, 0, 63, 1)',
-          'rgba(191, 0, 31, 1)',
-          'rgba(255, 0, 0, 1)'
-        ],
+        gradient: defaultGradient ? null
+          :
+          [
+            'rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 1)',
+            'rgba(0, 191, 255, 1)',
+            'rgba(0, 127, 255, 1)',
+            'rgba(0, 63, 255, 1)',
+            'rgba(0, 0, 255, 1)',
+            'rgba(0, 0, 223, 1)',
+            'rgba(0, 0, 191, 1)',
+            'rgba(0, 0, 159, 1)',
+            'rgba(0, 0, 127, 1)',
+            'rgba(63, 0, 91, 1)',
+            'rgba(127, 0, 63, 1)',
+            'rgba(191, 0, 31, 1)',
+            'rgba(255, 0, 0, 1)'
+          ],
         radius: 60,
         opacity: 0.7
       }

@@ -8,7 +8,7 @@ export default class Contact extends Component {
       <div >
         <div className="panel w3-animate-left w3-light-gray" >
           <h1 className="panel-title">
-            <i className="fa fa-cog fa-fw w3-large"></i>
+            <i className="fa fa-users fa-fw w3-xlarge"></i>
             Contact
           </h1>
           <p>Antidisestablishmentarianism</p>

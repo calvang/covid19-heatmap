@@ -6,14 +6,6 @@ import USA from '../views/USAStats';
 import Contact from '../views/Contact';
 import '../css/App.css';
 
-const Panels = {
-  0: null,
-  1: <Options />,
-  2: <Global />,
-  3: <USA />,
-  4: <Contact />
-}
-
 export default class Menu extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +14,8 @@ export default class Menu extends Component {
       isDropOpen: false,
       isMenuOpen: false,
       panels: [0,1,2,3,4],
-      currentPanel: 0
+      currentPanel: 0,
+      currentDropPanel: 2
     }
     this.hideCarousel = this.hideCarousel.bind(this);
     this.openPanel = this.openPanel.bind(this);
@@ -43,26 +36,41 @@ export default class Menu extends Component {
   }
 
   toggleDrop() {
-    const { isDropOpen, currentPanel } = this.state;
+    const { isDropOpen, currentPanel, currentDropPanel } = this.state;
     if (isDropOpen) {
       this.setState({ isDropOpen: false });
+      if (currentDropPanel === currentPanel) {
+        this.openPanel(currentDropPanel);
+      }
     } else {
       this.setState({ isDropOpen: true });
+      this.openPanel(currentDropPanel);
     }
-    this.openPanel(currentPanel);
   }
 
   openPanel(panelNum) {
     const { currentPanel } = this.state;
     panelNum === currentPanel ? this.setState({ currentPanel: 0 })
-      : this.setState({ currentPanel: panelNum });
+    : this.setState({ currentPanel: panelNum });
+    if (panelNum === 2 || panelNum ===3){
+      this.setState({ currentDropPanel: panelNum })
+    }
     console.log("Current State: ");
     console.log(this.state.currentPanel);
   }
 
   render() {
     const { isMenuOpen, isDropOpen } = this.state;
-    const { globalData } = this.props;
+    const { globalData, countryData } = this.props;
+    const Panels = {
+      0: null,
+      1: <Options />,
+      2: <Global 
+          globalData={globalData} 
+          countryData={countryData}/>,
+      3: <USA />,
+      4: <Contact />
+    }
     //console.log(this.props.globalData)
     return (
       <div className="w3-gray">
@@ -78,41 +86,41 @@ export default class Menu extends Component {
               <div className="w3-bar-block w3-center">
                 <button className="w3-bar-item w3-button w3-padding" 
                   onClick={this.toggleMenu}>
-                  <i className="fa fa-bars fa-fw w3-xlarge"></i>
+                  <i className="fa fa-bars fa-fw w3-xxlarge"></i>
                   <p>Hide</p>
                 </button> 
                 <button className="w3-bar-item w3-button w3-padding"
                   onClick={() => this.openPanel(1)}>
-                  <i className="fa fa-cog fa-fw w3-xlarge"></i>
+                  <i className="fa fa-cog fa-fw w3-xxlarge"></i>
                   <p>Options</p>
                 </button>
                 <button className="w3-bar-item w3-button w3-padding"
                   onClick={() => this.toggleDrop()}>
-                  <i className="fa fa-database fa-fw w3-xlarge"></i>
+                  <i className="fa fa-database fa-fw w3-xxlarge"></i>
                   <p>Stats</p>
                 </button>
                 { isDropOpen ? 
                   <div className="drop w3-light-gray">
                     <button className="w3-bar-item w3-button w3-padding"
                       onClick={() => this.openPanel(2)}>
-                      <i className="fa fa-globe fa-fw w3-xlarge"></i>
+                      <i className="fa fa-globe fa-fw w3-xxlarge"></i>
                       <p>Global</p>
                     </button>
                     <button className="w3-bar-item w3-button w3-padding"
                       onClick={() => this.openPanel(3)}>
-                      <i className="fa fa-map-marker fa-fw w3-xlarge"></i>
-                      <p>U.S.</p>
+                      <i className="fa fa-map-marker fa-fw w3-xxlarge"></i>
+                      <p>Local</p>
                     </button>
                   </div>
                 : null }
                 <button className="w3-bar-item w3-button w3-padding"
                   onClick={this.showCarousel}>
-                  <i className="fa fa-info-circle fa-fw w3-xlarge"></i>
+                  <i className="fa fa-info-circle fa-fw w3-xxlarge"></i>
                   <p>About</p>
                 </button>
                 <button className="w3-bar-item w3-button w3-padding"
                   onClick={() => this.openPanel(3)}>
-                  <i className="fa fa-users fa-fw w3-xlarge"></i>
+                  <i className="fa fa-users fa-fw w3-xxlarge"></i>
                   <p>Contact</p>
                 </button>
               </div>
@@ -134,7 +142,7 @@ export default class Menu extends Component {
               <button className="w3-bar-item w3-button w3-padding" 
                 onClick={this.toggleMenu}>
                 <p>
-                Total Cases: {globalData.NewConfirmed}   Total Recovered: {globalData.TotalRecovered}
+                <b>Total:</b> {globalData.TotalConfirmed},  <b>New:</b> {globalData.NewConfirmed}
                 </p>
               </button> 
             </div>
