@@ -133,7 +133,7 @@ export default class Menu extends Component {
             <div className="w3-bar-block w3-center">
               <button className="w3-bar-item w3-button w3-padding" 
                 onClick={this.toggleMenu}>
-                <i className="fa fa-bars fa-fw w3-xlarge"></i> Covid-19 Projection Heatmap
+                <i className="fa fa-bars fa-fw w3-xlarge"></i> COVID-19 Live Heatmap
               </button> 
             </div>
           </nav>
