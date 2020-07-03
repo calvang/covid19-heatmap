@@ -120,7 +120,7 @@ export default class Menu extends Component {
                   <p>About</p>
                 </button>
                 <button className="w3-bar-item w3-button w3-padding"
-                  onClick={() => this.openPanel(3)}>
+                  onClick={() => this.openPanel(4)}>
                   <i className="fa fa-users fa-fw w3-xxlarge"></i>
                   <p>Contact</p>
                 </button>
