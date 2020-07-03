@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { grey, blue, green } from "@material-ui/core/colors";
+import { grey, blue, green, deepPurple } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import heatmap from '../images/heatmap.png';
+import heatmap2 from '../images/heatmap2.png';
+import heatmap3 from '../images/heatmap3.png';
 
 export default class Slides extends Component{
 
@@ -18,8 +20,7 @@ export default class Slides extends Component{
       >
         <Slide
           media={
-            <div><i className="fa fa-map-o w3-xxxlarge"></i>
-            <p>Place heatmap here</p></div>
+            <img src={heatmap} style={{maxHeight:'90%', borderRadius: '5%'}} alt="img1"/>
           }
           mediaBackgroundStyle={{ backgroundColor: grey[200] }}
           style={{ backgroundColor: blue[900] }}
@@ -28,7 +29,7 @@ export default class Slides extends Component{
         />
         <Slide
           media={
-            <img src={heatmap} alt="img3"/>
+            <img src={heatmap2} style={{maxHeight:'90%', borderRadius: '5%'}} alt="img2"/>
           }
           mediaBackgroundStyle={{ backgroundColor: grey[200] }}
           style={{ backgroundColor: green[900] }}
@@ -37,11 +38,10 @@ export default class Slides extends Component{
         />
         <Slide
           media={
-            <div><i className="fa fa-map-o w3-xxxlarge"></i>
-            <p>Place heatmap here</p></div>
+            <img src={heatmap3} style={{maxHeight:'90%', borderRadius: '10%'}} alt="img3"/>
           }
-          mediaBackgroundStyle={{ backgroundColor: grey[200] }}
-          style={{ backgroundColor: grey[800] }}
+          mediaBackgroundStyle={{ backgroundColor: grey[400] }}
+          style={{ backgroundColor: deepPurple[800] }}
           title="Get Access to Resources"
           subtitle="Get quick access to local Covid-19 resources in your area."
         />
