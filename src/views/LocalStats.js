@@ -148,6 +148,7 @@ export default class Stats extends Component {
         <p>Deaths: <b>{formatNum(data.NewDeaths)}</b></p>
         <br></br>
         { data.ISO2 === 'US' ?
+        <>
         <div style={{display: 'inline'}}>
           <h3 className="panel-header" style={{display: 'inline'}}>
             <b>Counties by {sortBy[currentSort]}</b>
@@ -158,8 +159,9 @@ export default class Stats extends Component {
               <i className="fa fa-sort fa-fw w3-xlarge"></i>
           </button>
         </div>
-        : null}
         {Tables[currentSort]}
+        </>
+        : null}
       </div>
     );
   }
