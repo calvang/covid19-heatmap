@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
 import { formatNum } from '../components/GlobalTables';
 import { ListNav } from '../components/ListNav';
+import usCountyData from '../dataset/fullCountyData.json';
 import '../css/App.css';
+
+export const Table1 = (props) => {
+  var sortConfirmed = props.countyData.sort(function(a,b){return b.Cases-a.Cases});
+  return(
+      <table className="panel-table"><tbody>
+      {sortConfirmed.map(item => {
+        return <tr>
+          <td className="panel-table-el" >{item.County}, {item.State}</td>
+          <td>{formatNum(item.Cases)}</td>
+        </tr>;
+      })}
+      </tbody></table>
+  );
+}
+
+export const Table2 = (props) => {
+  var sortDeaths = props.countyData.sort(function(a,b){return b.CasesPerMillion-a.CasesPerMillion});
+  return(
+      <table className="panel-table"><tbody>
+      {sortDeaths.map(item => {
+        return <tr>
+          <td className="panel-table-el" >{item.County}, {item.State}</td>
+          <td>{formatNum(item.CasesPerMillion)}</td>
+        </tr>;
+      })}
+      </tbody></table>
+  );
+}
 
 export default class Stats extends Component {
   constructor(props) {
@@ -11,7 +40,12 @@ export default class Stats extends Component {
       searchVal: '',
       searchResults: [],
       countries: props.countryData,
-      cursor: 0
+      cursor: 0,
+      sortBy: [
+        'Confirmed Cases',
+        'Cases Per Million'
+      ],
+      currentSort: 0
     }
     this.handleKeyDown = this.handleKeyDown.bind(this)
   }
@@ -54,10 +88,20 @@ export default class Stats extends Component {
     }
   }
 
-  render() {
-    const { data, searchVal, searchResults } = this.state;
+  changeSort = () => {
+    const { currentSort } = this.state;
+    var nextSort;
+    currentSort < 1 ? nextSort = currentSort + 1 : nextSort = 0;
+    //console.log(nextSort)
+    this.setState({ currentSort: nextSort });
+  }
 
-    console.log(data)
+  render() {
+    const { data, searchVal, searchResults, currentSort, sortBy } = this.state;
+    const Tables = {
+      0: <Table1 countyData={usCountyData} />,
+      1: <Table2 countyData={usCountyData} />
+    }
 
     var totalRecoveryRate = parseFloat(data.PercentRecovered.toFixed(2));
     var totalMortalityRate = parseFloat(data.ConfirmedDeathRate.toFixed(2));
@@ -106,16 +150,16 @@ export default class Stats extends Component {
         { data.ISO2 === 'US' ?
         <div style={{display: 'inline'}}>
           <h3 className="panel-header" style={{display: 'inline'}}>
-            <b>Counties by Confirmed Cases</b>
+            <b>Counties by {sortBy[currentSort]}</b>
           </h3>
           <button className="w3-bar-item w3-button w3-padding"
-            style={{float: 'right'}}
+            style={{float: 'right', padding: '0px'}}
             onClick={this.changeSort}>
               <i className="fa fa-sort fa-fw w3-xlarge"></i>
           </button>
         </div>
         : null}
-        {/*Tables[currentSort]*/}
+        {Tables[currentSort]}
       </div>
     );
   }

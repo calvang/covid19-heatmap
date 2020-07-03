@@ -38,6 +38,7 @@ for county in abridged_data:
                 county['lon'] = float(i['Longitude'])
             county['Population'] = i['Population']
             county['State'] = i['State']
+            county['CasesPerMillion'] = round(1000000 * (float(county['Cases']) / float(i['Population'])))
 
 # check over data for inconsistencies
 index = 0

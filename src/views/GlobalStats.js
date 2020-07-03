@@ -7,8 +7,6 @@ import { formatNum,
          Table5 } from '../components/GlobalTables';
 import '../css/App.css';
 
-
-
 export default class Stats extends Component {
   constructor(props) {
     super(props)
@@ -20,7 +18,7 @@ export default class Stats extends Component {
         'Mortality Rate',
         'Cases Per Million',
         'Deaths Per Million'
-      ],
+      ]
     };
   }
 

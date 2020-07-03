@@ -41,7 +41,7 @@ export const Table3 = (props) => {
         {sortRate.map(item => {
           return <tr>
             <td className="panel-table-el" >{item.Country}</td>
-            <td>{formatNum(item.ConfirmedDeathRate)}</td>
+            <td>{parseFloat((Number(item.ConfirmedDeathRate)/100).toFixed(2))}</td>
           </tr>;
         })}
         </tbody></table>
