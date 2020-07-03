@@ -20,8 +20,8 @@ export default class MapContainer extends Component {
       countyData: [],
       heatmapData: {},
       center: {
-        lat: 40,
-        lng: 23
+        lat: 15,
+        lng: -80
       },
       zoom: 0,
       options: {
