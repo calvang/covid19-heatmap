@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Slides from './Slides';
 import Options from '../views/Options';
 import Global from '../views/GlobalStats';
-import USA from '../views/USAStats';
+import Local from '../views/LocalStats';
 import Contact from '../views/Contact';
 import '../css/App.css';
 
@@ -68,7 +68,8 @@ export default class Menu extends Component {
       2: <Global 
           globalData={globalData} 
           countryData={countryData}/>,
-      3: <USA />,
+      3: <Local
+          countryData={countryData} />,
       4: <Contact />
     }
     //console.log(this.props.globalData)
@@ -82,7 +83,7 @@ export default class Menu extends Component {
         { isMenuOpen ?
           <div className="sidebar w3-white">
             <nav className="sidebar w3-white w3-animate-top" styles="z-index:3;width:100px;" id="mySidebar">
-              <br></br>
+              {/* <br></br> */}
               <div className="w3-bar-block w3-center">
                 <button className="w3-bar-item w3-button w3-padding" 
                   onClick={this.toggleMenu}>

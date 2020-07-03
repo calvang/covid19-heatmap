@@ -2,6 +2,21 @@
     margin-bottom: 0;
 }
 
+*:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+input {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border:none
+}
+
 .loading {
   font-size: calc(16px + 2vmin);
   height: 400px;
@@ -11,7 +26,7 @@
 
 .topbar {
   font-family: Impact, Charcoal, sans-serif;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(8px + 2vmin);
   border-radius: 5px;
   margin:10px;
   height:auto;
@@ -42,6 +57,7 @@
   font-family: Impact, Charcoal, sans-serif;
   font-size: calc(10px + 1vmin);
   border-radius: 5px;
+  padding-top: 12px;
   height:auto;
   width:auto;
   bottom:0;
@@ -93,6 +109,7 @@
 
 .panel-header {
   border-bottom: 1px solid #bbb;
+  font-size: calc(10px + 2vmin);
 }
 
 .panel-center {
@@ -112,7 +129,7 @@
 }
 
 .panel-table-el {
-  border-top: 1px solid #bbb
+  border-bottom: 1px solid #bbb
 }
 
 a {
